@@ -4,9 +4,10 @@ import os
 from io import BytesIO
 import unicodedata
 import re
+import sqlalchemy as sa
+from dotenv import dotenv_values
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "C:/proyectos/creds/credenciales_lakehouse.json"
-
+config = dotenv_values("../.env")
 
 def read_parquet_gcp(gcp_path:str)->pd.DataFrame:
     elements = gcp_path.split("/")
@@ -112,3 +113,12 @@ def estandarizacion_metadatos(df, meta):
     df_meta_variables = pd.DataFrame(metadata_variables)
     df_meta_etiquetas =  pd.DataFrame(metadata_etiquetas).explode(['label_value','label_meaning'])
     return df,df_meta_variables,df_meta_etiquetas
+
+
+
+def generar_engine_aa():
+    db_url = f"postgresql://{config['USER']}:{config['PWD']}@{config['HOST']}:{config['PORT']}/{config['DBNAME']}"
+
+    # Crear el engine de SQLAlchemy
+    en_apoyo = sa.create_engine(db_url)
+    return en_apoyo

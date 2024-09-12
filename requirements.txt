@@ -5,4 +5,5 @@ pyarrow
 sqlalchemy 
 psycopg2 
 pyreadstat
+python-dotenv
 google-cloud-storage
