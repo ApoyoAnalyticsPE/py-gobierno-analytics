@@ -1,0 +1,8 @@
+ipykernel
+pandas
+numpy
+pyarrow 
+sqlalchemy 
+psycopg2 
+pyreadstat
+google-cloud-storage
